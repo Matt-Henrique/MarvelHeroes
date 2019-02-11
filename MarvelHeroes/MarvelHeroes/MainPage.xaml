@@ -2,13 +2,56 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MarvelHeroes"
-             x:Class="MarvelHeroes.MainPage">
+             x:Class="MarvelHeroes.MainPage"
+             Title="{Binding Titulo}">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <ListView HasUnevenRows="true"
+              IsRefreshing = "{Binding Ocupado}"
+              ItemsSource="{Binding Personagens}"
+              ItemSelected="Handle_ItemSelected">
+
+        <ListView.ItemTemplate>
+
+            <DataTemplate>
+
+                <ViewCell>
+
+                    <Grid Padding="20,30">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" 
+                            Grid.Column="1"
+                            Text="{Binding Nome}"
+                            FontSize="Large"
+                            TextColor="DarkBlue" />
+
+                        <Image Grid.Row="1"
+                            Grid.Column="1"
+                            Source="{Binding UrlImagem}"
+                            HorizontalOptions="Start"
+                            HeightRequest="180" />
+
+                        <Label Grid.Row="2" 
+                            Grid.Column="1"
+                            Text="{Binding Descricao}"
+                            FontSize="Small" />
+
+                    </Grid>
+
+                </ViewCell>
+
+            </DataTemplate>
+
+        </ListView.ItemTemplate>
+
+    </ListView>
 
 </ContentPage>
